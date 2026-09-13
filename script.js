@@ -46,8 +46,8 @@
         return;
       }
 
-      var phase1Duration = 2800;
-      var phase2Duration = 4200;
+      var phase1Duration = 1700;
+      var phase2Duration = 2500;
       var splitPoint = target * 0.9;
       var startTime = null;
 
@@ -107,6 +107,76 @@
       link.addEventListener('click', function(){
         menu.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+
+  (function(){
+    var revealEls = document.querySelectorAll('.reveal');
+    if(!revealEls.length) return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotion){
+      revealEls.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+
+    if('IntersectionObserver' in window){
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealEls.forEach(function(el){
+        observer.observe(el);
+      });
+    }else{
+      revealEls.forEach(function(el){ el.classList.add('in-view'); });
+    }
+  })();
+
+  (function(){
+    var btn = document.getElementById('backToTop');
+    if(!btn) return;
+
+    window.addEventListener('scroll', function(){
+      if(window.scrollY > 500){
+        btn.classList.add('visible');
+      }else{
+        btn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  (function(){
+    var supportsHoverFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!supportsHoverFine || reduceMotion) return;
+
+    var tiltCards = document.querySelectorAll('.work-card, .service');
+    if(!tiltCards.length) return;
+
+    tiltCards.forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var midX = rect.width / 2;
+        var midY = rect.height / 2;
+        var rotateX = ((y - midY) / midY) * -4;
+        var rotateY = ((x - midX) / midX) * 4;
+        card.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = '';
       });
     });
   })();
