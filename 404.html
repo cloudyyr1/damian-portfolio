@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Gabriel Damian Radu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .notfound-wrap{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 24px;
+  }
+  .notfound-code{
+    font-family:'Archivo Black', sans-serif;
+    font-size:clamp(64px, 14vw, 140px);
+    color:var(--sky);
+    text-shadow:0 0 24px rgba(90,200,250,0.5), 0 0 60px rgba(90,200,250,0.25);
+    line-height:1;
+    margin-bottom:12px;
+  }
+  .notfound-text{
+    font-size:18px;
+    color:var(--paper-dim);
+    max-width:420px;
+    margin-bottom:32px;
+  }
+</style>
+</head>
+<body>
+  <div class="notfound-wrap">
+    <div class="notfound-code display">404</div>
+    <p class="notfound-text">This page doesn't exist — but the work does. Head back to the homepage to see it.</p>
+    <a class="btn-primary" href="index.html">Back to homepage</a>
+  </div>
+</body>
+</html>
