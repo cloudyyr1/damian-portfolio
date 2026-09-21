@@ -47,8 +47,8 @@
       }
 
       var phase1Duration = 1700;
-      var phase2Duration = 2500;
-      var splitPoint = target * 0.9;
+      var phase2Duration = 1000;
+      var splitPoint = target * 1;
       var startTime = null;
 
       function step(timestamp){
